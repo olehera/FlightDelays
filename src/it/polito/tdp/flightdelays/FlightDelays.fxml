@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.flightdelays.FlightDelaysController">
@@ -32,7 +33,7 @@
 						</TextField>
                   <Button fx:id="btnAnalizza" mnemonicParsing="false" onAction="#doAnalizzaAeroporti" prefWidth="150.0" text="Analizza aeroporti">
                      <HBox.margin>
-                        <Insets left="10.0" />
+                        <Insets left="80.0" />
                      </HBox.margin>
                   </Button>
 					</children>
@@ -47,9 +48,9 @@
 								<Insets />
 							</HBox.margin>
 						</Text>
-						<ComboBox fx:id="cmbBoxAeroportoPartenza" prefWidth="150.0">
+						<ComboBox fx:id="cmbBoxAeroportoPartenza" prefHeight="25.0" prefWidth="215.0">
 							<HBox.margin>
-								<Insets left="20.0" />
+								<Insets left="35.0" />
 							</HBox.margin>
 						</ComboBox>
 					</children>
@@ -63,12 +64,12 @@
 					</padding>
                <children>
                   <Label prefHeight="17.0" prefWidth="135.0" text="Aereoprto di arrivo" />
-                  <ComboBox fx:id="cmbBoxAeroportoArrivo" prefWidth="150.0">
+                  <ComboBox fx:id="cmbBoxAeroportoArrivo" prefHeight="25.0" prefWidth="219.0">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </ComboBox>
-						<Button fx:id="btnAeroportiConnessi" mnemonicParsing="false" onAction="#doTestConnessione" prefWidth="150.0" text="Test connessione">
+						<Button fx:id="btnAeroportiConnessi" mnemonicParsing="false" onAction="#doTestConnessione" prefWidth="150.0" text="Percorso">
 							<HBox.margin>
 								<Insets left="10.0" />
 							</HBox.margin>
@@ -81,4 +82,11 @@
 			</BorderPane.margin>
 		</VBox>
 	</center>
+   <top>
+      <Label text="Flight Delays" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+   </top>
 </BorderPane>

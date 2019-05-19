@@ -1,8 +1,7 @@
 package it.polito.tdp.flightdelays;
 
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.extflightdelays.model.Airport;
@@ -34,10 +33,10 @@ public class FlightDelaysController {
     private Button btnAnalizza; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbBoxAeroportoPartenza"
-    private ComboBox<String> cmbBoxAeroportoPartenza; // Value injected by FXMLLoader
+    private ComboBox<Airport> cmbBoxAeroportoPartenza; // Value injected by FXMLLoader
 
     @FXML // fx:id="cmbBoxAeroportoArrivo"
-    private ComboBox<String> cmbBoxAeroportoArrivo; // Value injected by FXMLLoader
+    private ComboBox<Airport> cmbBoxAeroportoArrivo; // Value injected by FXMLLoader
 
     @FXML // fx:id="btnAeroportiConnessi"
     private Button btnAeroportiConnessi; // Value injected by FXMLLoader
@@ -54,10 +53,7 @@ public class FlightDelaysController {
     	model.creaGrafo(num);
     	txtResult.setText("Creato grafo con "+model.getVertexSize()+" vertici e "+model.getEdgeSize()+" archi");
     	
-    	List<String> elenco = new LinkedList<String>();
-    	
-    	for (Airport a : model.getAereoporti())
-    		elenco.add(a.getAirportName());
+    	Collection<Airport> elenco = model.getAereoporti();
     	
     	cmbBoxAeroportoArrivo.getItems().setAll(elenco);
     	cmbBoxAeroportoPartenza.getItems().setAll(elenco);
@@ -66,26 +62,17 @@ public class FlightDelaysController {
 
     @FXML
     void doTestConnessione(ActionEvent event) {
-    	String p = cmbBoxAeroportoPartenza.getValue();
-    	String a = cmbBoxAeroportoArrivo.getValue();
-    	Airport partenza = null;
-    	Airport arrivo = null;
-    	
-    	for (Airport air : model.getAereoporti()) {
-    		if (air.getAirportName().equals(p))
-    			partenza = air;
-    		else if (air.getAirportName().equals(a))
-    			arrivo = air; 
-    	}
+    	Airport partenza = cmbBoxAeroportoPartenza.getValue();
+    	Airport arrivo = cmbBoxAeroportoArrivo.getValue();
     	
     	if (model.testConnessione(partenza.getId(), arrivo.getId())) {
-    		txtResult.setText("E' possibile raggiungere l'aereoporto di "+a+" da "+p+"\n\nPercorso : \n");
+    		txtResult.setText("E' possibile raggiungere l'aereoporto di "+arrivo+" da "+partenza+"\n\nPercorso : \n");
     		
     		for (Airport airport : model.trovaPercorso(partenza.getId(), arrivo.getId()) )
-    			txtResult.appendText(airport.getAirportName()+"\n");
+    			txtResult.appendText(airport+"\n");
     	}
     	else
-    		txtResult.setText("Non è possibile raggiungere l'aereoporto di "+a+" da "+p);
+    		txtResult.setText("Non è possibile raggiungere l'aereoporto di "+arrivo+" da "+partenza);
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
